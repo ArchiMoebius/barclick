@@ -1,0 +1,84 @@
+markdown_extensions:
+  - md_in_html
+  - meta
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - tables
+  - attr_list
+
+plugins:
+  - search:
+      separator: '[\s\-\.]+'
+  - minify:
+      minify_html: true
+  - github-contributors:
+      repository: ArchiMoebius/barclick
+
+repo_url: https://github.com/ArchiMoebius/barclick
+repo_name: BarClick
+
+site_name: BarClick
+site_url: https://doesnotroute.tld
+site_description: "A game created to explore Godot"
+site_author: ArchiMoebius
+copyright: Copyright &copy; 2021 - 2022 ArchiMoebius
+
+theme:
+  include_search_page: true
+  search_index_only: true
+  name: material
+  custom_dir: overrides
+  favicon: images/favicon.ico
+  logo: images/logo.png
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.tracking
+    #- navigation.indexes # this or toc
+    - toc.integrate # seems busted when a plugin is parsing and generating its own markdown?...
+    - navigation.top
+  palette:
+    - scheme: slate
+      primary: grey
+      accent: grey
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - scheme: default
+      primary: grey
+      accent: grey
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  static_templates:
+    - 404.html # https://squidfunk.github.io/mkdocs-material/customization/?h=404#setup-and-theme-structure
+
+nav:
+  - Home: 'index.md'
+  - Shoulders stood on: 'resources.md'
+  - Hero's & Legend's: 'contributors.md'
+  - About: 'about.md'
+  - Issue Tracker: 'https://github.com/ArchiMoebius/barclick/issues'
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
+  - javascripts/tablesort.js
+
+extra:
+  version: 2022.01.17
+  generator: true
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ArchiMoebius/barclick

@@ -1,0 +1,3 @@
+# About
+
+Having always enjoyed playing video games, and having found the GoDot engine - it was time to make something cool! Being 'educational' in nature (and having a few younger kids around) - both game types (Logic and Memory) are my pursuit. BarClick is a light-weight game made over a weekend to give my kiddo's something to poke at that won't rot their brains!...
