@@ -17,7 +17,7 @@ The [Latest release](https://github.com/ArchiMoebius/barclick/releases){:target=
   </div>
   <div class="tabbed-content">
     <div class="tabbed-block">
-      <iframe src="game/html/index.html" width="480 " height="720">
+      <iframe src="https://archimoebius.github.io/barclick/game/html/index.html" width="480 " height="720">
       </iframe>
     </div>
     <div class="tabbed-block">
