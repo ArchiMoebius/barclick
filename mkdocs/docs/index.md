@@ -4,7 +4,7 @@ Follow the pattern, can you remember them all?
 
 This is the idea behind BarClick - a Godot game with simple mechanics and multi-platform support!
 
-The [Latest release](https://github.com/ArchiMoebius/barclick/releases){:target="_blank"} contains support for [Windows](/game/windows/barclick.x86_64.exe){:target="_blank"}, [Linux](/game/linux/barclick.x86_64){:target="_blank"}, and [Android](/game/android/barclick.apk){:target="_blank"}.
+The [Latest release](https://github.com/ArchiMoebius/barclick/releases){:target="_blank"} contains support for [Windows](https://github.com/ArchiMoebius/barclick/raw/gh-pages/game/windows/barclick.x86_64.exe){:target="_blank"}, [Linux](https://github.com/ArchiMoebius/barclick/raw/gh-pages/game/linux/barclick.x86_64){:target="_blank"}, and [Android](https://github.com/ArchiMoebius/barclick/raw/gh-pages/game/android/barclick.apk){:target="_blank"}.
 
 <div class="tabbed-set tabbed-alternate" data-tabs="3:1" style="--md-indicator-x: 0px; --md-indicator-width: 109px;">
   <input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio">
@@ -17,7 +17,7 @@ The [Latest release](https://github.com/ArchiMoebius/barclick/releases){:target=
   </div>
   <div class="tabbed-content">
     <div class="tabbed-block">
-      <iframe src="/game/html/index.html" width="480 " height="720">
+      <iframe src="game/html/index.html" width="480 " height="720">
       </iframe>
     </div>
     <div class="tabbed-block">
