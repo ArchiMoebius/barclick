@@ -7,7 +7,7 @@ var time = 0
 var ColorButton = preload("res://ColorButton.tscn")
 var round_won = false
 var time_period = 1
-var level = [1, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8]
+var level = [1, 2, 3, 3, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8]
 var level_index = 0
 
 func _ready():
@@ -38,7 +38,7 @@ func play_round():
 		add_child(cb)
 
 	$HUD.z_index = cb.z_index + 1
-	$HUD/HealthBarNode/HealthBar.show()
+	$HUD/HealthBar.show()
 
 	secret_pattern.shuffle()
 
@@ -57,7 +57,7 @@ func button_press(name):
 			cb.pressable(false)
 			cb.play_sound()
 		else:
-			$HUD/HealthBarNode/HealthBar.value -= 1
+			$HUD/HealthBar.value -= 1
 			$Failure.play()
 			cb.set_color(cb.COLOR_UP)
 
@@ -65,8 +65,8 @@ func button_press(name):
 		round_won = true
 		time_period = 0.1
 
-		if $HUD/HealthBarNode/HealthBar.value < 3:
-			$HUD/HealthBarNode/HealthBar.value += 1
+		if $HUD/HealthBar.value < 3:
+			$HUD/HealthBar.value += 1
 		
 		for i in range(button_count):
 			secret_pattern_show.append("Button%s" % String(i))
@@ -74,10 +74,10 @@ func button_press(name):
 func _process(delta):
 	time += delta
 
-	if time > time_period and $HUD/HealthBarNode/HealthBar.value <= 0:
+	if time > time_period and $HUD/HealthBar.value <= 0:
 		level_index = level.size()
-		$HUD/HealthBarNode/HealthBar.value = 3
-		$HUD/HealthBarNode/HealthBar.hide()
+		$HUD/HealthBar.value = 3
+		$HUD/HealthBar.hide()
 		$RoundTimer.start()
 		$HUD/Loading.start()
 		round_won = false

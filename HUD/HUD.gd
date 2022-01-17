@@ -8,9 +8,16 @@ signal start_game
 
 func _ready():
 	$".".show()
-	$HealthBarNode/HealthBar.hide()
+	$HealthBar.hide()
 	$LoadScreenAudioStream.play()
 	$Level.hide()
+
+	$HealthBar.rect_size = Vector2(get_viewport().get_visible_rect().size.y, 20)
+	$HealthBar.rect_position = Vector2(0, get_viewport().get_visible_rect().size.y)
+
+	$HealthBar.call_deferred("update")
+
+	print($HealthBar.rect_size)
 
 func set_level(level):
 	$Level.text = String(level)
@@ -38,7 +45,7 @@ func _on_StartButton_pressed():
 	$QuitButton.hide()
 	$Title.hide()
 	$Message.hide()
-	$HealthBarNode/HealthBar.show()
+	$HealthBar.show()
 	$LoadScreenAudioStream.stop()
 	playing = true
 
@@ -48,7 +55,7 @@ func game_loop_end(round_won):
 	$Level.hide()
 	set_level(0)
 
-	$HealthBarNode/HealthBar.value = 3
+	$HealthBar.value = 3
 
 	if round_won:
 		round_won = false

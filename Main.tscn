@@ -6,10 +6,12 @@
 
 [node name="Main" type="Control"]
 margin_right = 480.0
-margin_bottom = 780.0
-grow_horizontal = 2
+margin_bottom = 720.0
+grow_horizontal = 0
 grow_vertical = 2
-rect_min_size = Vector2( 420, 780 )
+rect_min_size = Vector2( 480, 720 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -25,6 +27,7 @@ one_shot = true
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 480.0
 margin_bottom = 720.0
+grow_vertical = 2
 rect_min_size = Vector2( 480, 720 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
