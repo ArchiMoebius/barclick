@@ -1,0 +1,18 @@
+{
+  "description": "BarClick is a simple pattern matching game for kids to work on memory.",
+  "title": "BarClick",
+  "links": [
+    {
+      "title": "Play",
+      "href": "https://archimoebius.github.io/barclick/"
+    },
+    {
+      "title": "View Source",
+      "href": "https://github.com/ArchiMoebius/barclick"
+    },
+    {
+      "title": "Download",
+      "href": "https://github.com/ArchiMoebius/barclick/releases"
+    }
+  ]
+}
