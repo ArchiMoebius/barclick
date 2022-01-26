@@ -14,6 +14,7 @@ func _ready():
 	randomize()
 
 func play_round():
+	$HUD.max_level = level.size() - 1
 	$HUD.set_level(level_index)
 	secret_pattern = []
 
@@ -38,7 +39,7 @@ func play_round():
 		add_child(cb)
 
 	$HUD.z_index = cb.z_index + 1
-	$HUD/HealthBar.show()
+	$HUD/HealthIndicator.show()
 
 	secret_pattern.shuffle()
 
@@ -57,7 +58,7 @@ func button_press(name):
 			cb.pressable(false)
 			cb.play_sound()
 		else:
-			$HUD/HealthBar.value -= 1
+			$HUD/HealthIndicator.hit()
 			$Failure.play()
 			cb.set_color(cb.COLOR_UP)
 
@@ -65,8 +66,7 @@ func button_press(name):
 		round_won = true
 		time_period = 0.1
 
-		if $HUD/HealthBar.value < 3:
-			$HUD/HealthBar.value += 1
+		$HUD/HealthIndicator.add_health(1)
 		
 		for i in range(button_count):
 			secret_pattern_show.append("Button%s" % String(i))
@@ -74,10 +74,10 @@ func button_press(name):
 func _process(delta):
 	time += delta
 
-	if time > time_period and $HUD/HealthBar.value <= 0:
+	if time > time_period and $HUD/HealthIndicator.health <= 0:
 		level_index = level.size()
-		$HUD/HealthBar.value = 3
-		$HUD/HealthBar.hide()
+		$HUD/HealthIndicator.reset_health()
+		$HUD/HealthIndicator.hide()
 		$RoundTimer.start()
 		$HUD/Loading.start()
 		round_won = false

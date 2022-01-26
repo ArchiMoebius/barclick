@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://icons/heart_full.png" type="Texture" id=1]
+[ext_resource path="res://icons/heart_empty.png" type="Texture" id=2]
+[ext_resource path="res://HUD/HeartSprite.gd" type="Script" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "empty",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "full",
+"speed": 5.0
+} ]
+
+[node name="HeartSprite" type="AnimatedSprite"]
+position = Vector2( 40, 40 )
+frames = SubResource( 1 )
+animation = "empty"
+script = ExtResource( 3 )

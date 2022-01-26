@@ -3,24 +3,18 @@ extends Node2D
 var time = 0
 var time_period = 1
 var playing = false
+var max_level = 0
 
 signal start_game
 
 func _ready():
 	$".".show()
-	$HealthBar.hide()
+	$HealthIndicator.hide()
 	$LoadScreenAudioStream.play()
 	$Level.hide()
 
-	$HealthBar.rect_size = Vector2(get_viewport().get_visible_rect().size.y, 20)
-	$HealthBar.rect_position = Vector2(0, get_viewport().get_visible_rect().size.y)
-
-	$HealthBar.call_deferred("update")
-
-	print($HealthBar.rect_size)
-
 func set_level(level):
-	$Level.text = String(level)
+	$Level.text = "%s/%s" % [String(level), max_level]
 
 func _process(delta):
 	time += delta
@@ -45,7 +39,7 @@ func _on_StartButton_pressed():
 	$QuitButton.hide()
 	$Title.hide()
 	$Message.hide()
-	$HealthBar.show()
+	$HealthIndicator.show()
 	$LoadScreenAudioStream.stop()
 	playing = true
 
@@ -55,7 +49,7 @@ func game_loop_end(round_won):
 	$Level.hide()
 	set_level(0)
 
-	$HealthBar.value = 3
+	$HealthIndicator.reset_health()
 
 	if round_won:
 		round_won = false
