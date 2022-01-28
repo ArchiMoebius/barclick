@@ -7,14 +7,16 @@ var time = 0
 var ColorButton = preload("res://ColorButton.tscn")
 var round_won = false
 var time_period = 1
-var level = [1, 2, 3, 3, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8]
+var level = [2, 2, 3, 3, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8]
 var level_index = 0
 
 func _ready():
 	randomize()
 
-func play_round():
 	$HUD.max_level = level.size() - 1
+	$HUD.set_level(level_index)
+
+func play_round():
 	$HUD.set_level(level_index)
 	secret_pattern = []
 
@@ -22,20 +24,23 @@ func play_round():
 
 	round_won = false
 
-	var button_height = int(get_viewport().get_visible_rect().size.y/button_count)
+	var button_height = int(get_viewport().get_visible_rect().size.y / button_count)
 	var cb = false
 
 	for i in range(button_count):
 		cb = ColorButton.instance()
-		cb.name = "Button%s" % String(i)
+		
+		var cb_symbol = ""
+		
+		if $HUD.is_game_mode($HUD.GAME_MODE_FOLLOW_NAME) or $HUD.is_game_mode($HUD.GAME_MODE_FIND_NAME):
+			cb_symbol = String(i)
 
-		cb.position.y = i * button_height
+		cb.setup(i, button_height, cb_symbol)
 
 		cb.connect("pressed", $".", "button_press")
-		cb.resize(button_height)
 
 		secret_pattern.append(cb.name)
-		
+
 		add_child(cb)
 
 	$HUD.z_index = cb.z_index + 1
@@ -91,10 +96,30 @@ func _process(delta):
 			var cb = get_node(secret_pattern_show.pop_at(0))
 
 			if cb:
-				cb.press()
+				cb.press(0.8)
 
 		if secret_pattern_show.size() <= 0:
 			time_period = 1
+
+			if $HUD.is_game_mode($HUD.GAME_MODE_FIND) or $HUD.is_game_mode($HUD.GAME_MODE_FIND_NAME):
+				var new_button_order = []
+
+				for i in range(button_count):
+					new_button_order.append(i)
+				
+				new_button_order.shuffle()
+				
+				yield(get_tree().create_timer(2), "timeout")
+
+				var i = 0
+
+				for p in new_button_order:
+					var cb = get_node("Button%s" % String(i))
+
+					if cb:
+						cb.move_button(p)
+
+					i += 1
 
 			for s in secret_pattern:
 				var cb = get_node(s)

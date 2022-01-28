@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ColorButton.gd" type="Script" id=1]
+[ext_resource path="res://fonts/OpenDyslexic3-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 2 )
 
 [node name="ColorButton2dNode" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,14 +24,18 @@ __meta__ = {
 margin_right = 480.0
 margin_bottom = 180.0
 size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+shortcut_in_tooltip = false
 button_mask = 7
+text = "A"
 flat = true
+expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ResetButtonUpTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.2
 one_shot = true
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

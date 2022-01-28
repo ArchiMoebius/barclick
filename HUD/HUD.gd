@@ -1,5 +1,12 @@
 extends Node2D
 
+const GAME_MODE_FOLLOW_NAME = "Easy"
+const GAME_MODE_FIND_NAME = "Medium"
+const GAME_MODE_FOLLOW = "Hard"
+const GAME_MODE_FIND = "Insain"
+
+const GAME_MODES = [GAME_MODE_FOLLOW_NAME, GAME_MODE_FIND_NAME, GAME_MODE_FOLLOW, GAME_MODE_FIND]
+
 var time = 0
 var time_period = 1
 var playing = false
@@ -8,10 +15,17 @@ var max_level = 0
 signal start_game
 
 func _ready():
+
+	for i in range(GAME_MODES.size()):
+		$GameModeNode/Options.add_item(GAME_MODES[i], i+1)
+
 	$".".show()
 	$HealthIndicator.hide()
 	$LoadScreenAudioStream.play()
 	$Level.hide()
+
+func is_game_mode(mode):
+	return GAME_MODES[$GameModeNode/Options.get_selected_id()-1] == mode
 
 func set_level(level):
 	$Level.text = "%s/%s" % [String(level), max_level]
@@ -37,6 +51,7 @@ func _on_StartButton_pressed():
 	$Loading.start()
 	$StartButton.hide()
 	$QuitButton.hide()
+	$GameModeNode.hide()
 	$Title.hide()
 	$Message.hide()
 	$HealthIndicator.show()
@@ -61,6 +76,9 @@ func game_loop_end(round_won):
 	$Message.show()
 	$StartButton.show()
 	$QuitButton.show()
+
+	$GameModeNode.z_index = 999
+	$GameModeNode.show()
 
 	$GamePlayAudioStream.stop()
 	$LoadScreenAudioStream.stop()

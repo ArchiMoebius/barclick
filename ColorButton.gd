@@ -4,39 +4,91 @@ const COLOR_UP = "up"
 const COLOR_DOWN = "down"
 
 var sound_player = AudioStreamPlayer.new()
+var theme_index = 0
 
-var button_colors = {
-	"Button0_up": "#28536C",
-	"Button0_down": "#02314D",
-	"Button0_sound": preload("res://sounds/blue.wav"),
-	"Button1_up": "#2D8828",
-	"Button1_down": "#006000",
-	"Button1_sound": preload("res://sounds/green.wav"),
-	"Button2_up": "#86A136",
-	"Button2_down": "#557200",
-	"Button2_sound": preload("res://sounds/grass.wav"),
-	"Button3_up": "#AA9B39",
-	"Button3_down": "#796900",
-	"Button3_sound": preload("res://sounds/yellow.wav"),
-	"Button4_up": "#AA7739",
-	"Button4_down": "#794200",
-	"Button4_sound": preload("res://sounds/orange.wav"),
-	"Button5_up": "#AA3939",
-	"Button5_down": "#790000",
-	"Button5_sound": preload("res://sounds/red.wav"),
-	"Button6_up": "#7F2A68",
-	"Button6_down": "#5A0041",
-	"Button6_sound": preload("res://sounds/pink.wav"),
-	"Button7_up": "#462E74",
-	"Button7_down": "#1F0452",
-	"Button7_sound": preload("res://sounds/violet.wav"),
-}
+const THEMES = [
+	{
+		"up": "#0D0D92", # Ultramarine
+		"down": "#35353B", # Dark Lava
+		"sound": preload("res://sounds/blue.wav"),
+		"symbol_color": "#9B9BA1"
+	},
+	{
+		"up": "#008309", # Ao
+		"down": "#35353B", # Dark Lava
+		"sound": preload("res://sounds/green.wav"),
+		"symbol_color": "#9B9BA1"
+	},
+	{
+		"up": "#00675C", # Teal Green
+		"down": "#35353B", # Dark Lava
+		"sound": preload("res://sounds/grass.wav"),
+		"symbol_color": "#9B9BA1"
+	},
+	{
+		"up": "#A74700", # Brown
+		"down": "#35353B", # Dark Lava
+		"sound": preload("res://sounds/yellow.wav"),
+		"symbol_color": "#9B9BA1"
+	},
+	{
+		"up": "#A70400", # Dark Candy Apple Red
+		"down": "#35353B", # Dark Lava
+		"sound": preload("res://sounds/orange.wav"),
+		"symbol_color": "#9B9BA1"
+	},
+	{
+		"up": "#829800", # Heart Gold
+		"down": "#35353B", # Dark Lava
+		"sound": preload("res://sounds/red.wav"),
+		"symbol_color": "#9B9BA1"
+	},
+	{
+		"up": "#5D0166", # Indigo
+		"down": "#35353B", # Dark Lava
+		"sound": preload("res://sounds/pink.wav"),
+		"symbol_color": "#9B9BA1"
+	},
+	{
+		"up": "#9C7500", # Drab
+		"down": "#35353B", # Dark Lava
+		"sound": preload("res://sounds/violet.wav"),
+		"symbol_color": "#9B9BA1"
+	}
+]
+
+var button_theme
+var button_height
 
 signal pressed(name)
 
-func set_color(direction):
-	$ColorRect.color = button_colors["%s_%s" % [$".".name, direction]]
+func setup(index, height, symbol):
+	button_height = height
 	
+	$".".resize(height)
+	$".".name = "Button%s" % String(index)
+	
+	$Button.text = symbol
+
+	set_theme(index)
+	move_button(index)
+
+func move_button(index):
+	$".".position.y = index * button_height
+
+func set_theme(index):
+	button_theme = THEMES[index % THEMES.size()]
+	theme_index = index
+
+	$Button.set("custom_colors/font_color_disabled", button_theme["symbol_color"])
+	$Button.set("custom_colors/font_color_focus", button_theme["symbol_color"])
+	$Button.set("custom_colors/font_color", button_theme["symbol_color"])
+	$Button.set("custom_colors/font_color_hover", button_theme["down"])
+	$Button.set("custom_colors/font_color_pressed", "#68686E")
+
+func set_color(direction):
+	$ColorRect.color = button_theme["%s" % direction]
+
 func _ready():
 	set_color(COLOR_UP)
 	pressable(false)
@@ -54,12 +106,12 @@ func _on_Button_pressed():
 	if not $Button.disabled:
 		emit_signal("pressed", $".".name)
 
-func press():
+func press(up_delay):
 	set_color(COLOR_DOWN)
-	$ResetButtonUpTimer.start(0.5)
+	$ResetButtonUpTimer.start(up_delay)
 
 func play_sound():
-	sound_player.set_stream(button_colors["%s_sound" % $".".name])
+	sound_player.set_stream(button_theme["sound"])
 	sound_player.volume_db = 1
 	sound_player.pitch_scale = 1
 	sound_player.play()
