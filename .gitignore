@@ -380,7 +380,6 @@ cppcheck-cppcheck-build-dir/
 *.func-sort-c.html
 *index-sort-f.html
 *index-sort-l.html
-*index.html
 godot.info
 amber.png
 emerald.png
