@@ -159,3 +159,6 @@ func _on_HUD_player_lost():
 	level_index = level.size()
 	round_won = false
 	$RoundTimer.start()
+
+func _on_HUD_show_pattern_complete():
+	pass
