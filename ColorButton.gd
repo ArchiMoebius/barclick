@@ -14,7 +14,7 @@ const THEMES = [
 		"down": "#35353B", # Dark Lava
 		"sound": preload("res://sounds/blue.wav"),
 		"symbol_color": "#9B9BA1",
-		"color_word": "#EAEAEA"
+		"color_word": "#bec4dd"
 	},
 	{
 		"word": "Ao",
@@ -22,7 +22,7 @@ const THEMES = [
 		"down": "#35353B", # Dark Lava
 		"sound": preload("res://sounds/green.wav"),
 		"symbol_color": "#9B9BA1",
-		"color_word": "#EAEAEA"
+		"color_word": "#bec4dd"
 	},
 	{
 		"word": "Teal Green",
@@ -30,7 +30,7 @@ const THEMES = [
 		"down": "#35353B", # Dark Lava
 		"sound": preload("res://sounds/grass.wav"),
 		"symbol_color": "#9B9BA1",
-		"color_word": "#EAEAEA"
+		"color_word": "#bec4dd"
 	},
 	{
 		"word": "Brown",
@@ -38,7 +38,7 @@ const THEMES = [
 		"down": "#35353B", # Dark Lava
 		"sound": preload("res://sounds/yellow.wav"),
 		"symbol_color": "#9B9BA1",
-		"color_word": "#EAEAEA"
+		"color_word": "#bec4dd"
 	},
 	{
 		"word": "Dark Red",
@@ -46,7 +46,7 @@ const THEMES = [
 		"down": "#35353B", # Dark Lava
 		"sound": preload("res://sounds/orange.wav"),
 		"symbol_color": "#9B9BA1",
-		"color_word": "#EAEAEA"
+		"color_word": "#bec4dd"
 	},
 	{
 		"word": "Heart Gold",
@@ -54,7 +54,7 @@ const THEMES = [
 		"down": "#35353B", # Dark Lava
 		"sound": preload("res://sounds/red.wav"),
 		"symbol_color": "#9B9BA1",
-		"color_word": "#EAEAEA"
+		"color_word": "#bec4dd"
 	},
 	{
 		"word": "Indigo",
@@ -62,7 +62,7 @@ const THEMES = [
 		"down": "#35353B", # Dark Lava
 		"sound": preload("res://sounds/pink.wav"),
 		"symbol_color": "#9B9BA1",
-		"color_word": "#EAEAEA"
+		"color_word": "#bec4dd"
 	},
 	{
 		"word": "Drab",
@@ -70,7 +70,7 @@ const THEMES = [
 		"down": "#35353B", # Dark Lava
 		"sound": preload("res://sounds/violet.wav"),
 		"symbol_color": "#9B9BA1",
-		"color_word": "#EAEAEA"
+		"color_word": "#bec4dd"
 	}
 ]
 
@@ -80,15 +80,13 @@ var button_mode = ""
 
 signal pressed(name)
 
-func setup(index, theme_index, height, symbol):
+func setup(index, t_idx, height, symbol):
 	button_height = height
-	
+
 	$".".resize(height)
 	$".".name = "Button%s" % String(index)
-	
-	var HUD = $".".get_parent()
 
-	set_theme(theme_index)
+	set_theme(t_idx)
 	move_button(index)
 
 	if button_mode == COLOR_WORD:
@@ -97,7 +95,7 @@ func setup(index, theme_index, height, symbol):
 	$Button.text = symbol
 
 func move_button(index):
-	$".".position.y = index * button_height
+	$".".position.y = index * button_height + 70
 
 func set_theme(index):
 	button_theme = THEMES[index % THEMES.size()]
@@ -141,7 +139,10 @@ func _on_Button_pressed():
 
 func press(up_delay):
 	set_color(COLOR_DOWN)
-	play_sound()
+	
+	if $".".get_parent().get_node("HUD").is_tap_sound_enabled():
+		play_sound()
+
 	$ResetButtonUpTimer.start(up_delay)
 
 func play_sound():

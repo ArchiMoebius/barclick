@@ -7,7 +7,7 @@ var time = 0
 var ColorButton = preload("res://ColorButton.tscn")
 var round_won = false
 var time_period = 1
-var level = [2, 2, 3, 3, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8]
+var level = []
 var level_index = 0
 
 var lvl_pattern = []
@@ -20,7 +20,10 @@ func _ready():
 
 	for i in range(0, $HUD.max_button):
 		lvl_pattern.append(i)
+
 	lvl_pattern.shuffle()
+	
+	level = $HUD.get_mode_levels()
 
 	$HUD.max_level = level.size() - 1
 	$HUD.set_level(level_index)
@@ -33,7 +36,7 @@ func play_round():
 
 	round_won = false
 
-	var button_height = int(get_viewport().get_visible_rect().size.y / button_count)
+	var button_height = int((get_viewport().get_visible_rect().size.y-70) / button_count)
 	var cb = false
 
 	for i in range(button_count):
@@ -97,17 +100,21 @@ func button_press(name):
 		if name == secret_pattern.front():
 			secret_pattern.pop_at(0)
 			cb.set_color(cb.COLOR_DOWN)
-			cb.play_sound()
+
+			if $HUD.is_tap_sound_enabled():
+				cb.play_sound()
 			cb.pressable(false)
 		else:
-			$HUD/HealthIndicator.hit()
-			$Failure.play()
+			$HUD/InfoBar/HealthIndicator.hit()
+
+			if $HUD.is_tap_sound_enabled():
+				$Failure.play()
 			cb.set_color(cb.COLOR_UP)
 
 	if secret_pattern.size() <= 0:
 		round_won = true
 
-		$HUD/HealthIndicator.add_health(1)
+		$HUD/InfoBar/HealthIndicator.add_health(1)
 
 		if not $HUD.is_game_mode($HUD.GAME_MODE_SHUFFLE):
 			pass # play diddy?
@@ -125,20 +132,24 @@ func _on_RoundTimer_timeout():
 	if round_won:
 		level_index += 1
 
-	round_won = false
-
 	if level_index >= level.size():
-		$HUD.game_loop_end(round_won)
+		$HUD.game_loop_end(round_won, level.size() - 1)
 		level_index = 0
 		button_count = level[level_index]
 	else:
+		round_won = false
+		$HUD.save_level_info(level_index - 1)
 		button_count = level[level_index]
 		play_round()
 
 func _on_HUD_start_game():
+	level = $HUD.get_mode_levels()
+
 	$RoundTimer.start()
 
 func _on_HUD_player_lost():
+	$HUD.save_level_info(level_index - 1)
+	
 	for i in range(button_count):
 		var cb = get_node("Button%s" % String(i))
 

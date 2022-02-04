@@ -1,9 +1,9 @@
-[gd_resource type="Theme" load_steps=10 format=2]
+[gd_resource type="Theme" load_steps=16 format=2]
 
 [ext_resource path="res://fonts/OpenDyslexic3-Regular.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.0392157, 0.0431373, 0.0745098, 1 )
+bg_color = Color( 0.0901961, 0.0941176, 0.180392, 1 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.121569, 0.168627, 0.411765, 1 )
@@ -24,6 +24,25 @@ corner_detail = 1
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.372549, 0.490196, 0.396078, 1 )
 
+[sub_resource type="DynamicFont" id=13]
+size = 22
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.0901961, 0.0941176, 0.180392, 1 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.0627451, 0.0823529, 0.180392, 1 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.14902, 0.164706, 0.243137, 1 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.0509804, 0.0627451, 0.321569, 1 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.0745098, 0.0784314, 0.152941, 1 )
+
 [sub_resource type="DynamicFont" id=1]
 size = 28
 font_data = ExtResource( 1 )
@@ -37,3 +56,24 @@ Button/styles/normal = SubResource( 2 )
 Button/styles/pressed = SubResource( 6 )
 ProgressBar/styles/bg = SubResource( 7 )
 ProgressBar/styles/fg = SubResource( 8 )
+TabContainer/colors/font_color_bg = Color( 0.69, 0.69, 0.69, 1 )
+TabContainer/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+TabContainer/colors/font_color_fg = Color( 0.94, 0.94, 0.94, 1 )
+TabContainer/constants/hseparation = 4
+TabContainer/constants/label_valign_bg = 2
+TabContainer/constants/label_valign_fg = 0
+TabContainer/constants/side_margin = 8
+TabContainer/constants/top_margin = 24
+TabContainer/fonts/font = SubResource( 13 )
+TabContainer/icons/decrement = null
+TabContainer/icons/decrement_highlight = null
+TabContainer/icons/increment = null
+TabContainer/icons/increment_highlight = null
+TabContainer/icons/menu = null
+TabContainer/icons/menu_highlight = null
+TabContainer/styles/panel = SubResource( 9 )
+TabContainer/styles/tab_bg = SubResource( 10 )
+TabContainer/styles/tab_disabled = SubResource( 11 )
+TabContainer/styles/tab_fg = SubResource( 12 )
+Tree/styles/bg = SubResource( 14 )
+VBoxContainer/constants/separation = 4
