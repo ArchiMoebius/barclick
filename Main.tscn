@@ -43,4 +43,6 @@ autostart = true
 [node name="HUD" parent="." instance=ExtResource( 5 )]
 
 [connection signal="timeout" from="RoundTimer" to="." method="_on_RoundTimer_timeout"]
+[connection signal="player_lost" from="HUD" to="." method="_on_HUD_player_lost"]
+[connection signal="show_pattern_complete" from="HUD" to="." method="_on_HUD_show_pattern_complete"]
 [connection signal="start_game" from="HUD" to="." method="_on_HUD_start_game"]
