@@ -9,65 +9,65 @@ var theme_index = 0
 
 const THEMES = [
 	{
-		"word": "Ultramarine",
-		"up": "#0D0D92", # Ultramarine
-		"down": "#35353B", # Dark Lava
+		"word": "Red",
+		"up": "#ff0000",
+		"down": "#35353B",
 		"sound": preload("res://sounds/blue.wav"),
 		"symbol_color": "#9B9BA1",
 		"color_word": "#bec4dd"
 	},
 	{
-		"word": "Ao",
-		"up": "#008309", # Ao
-		"down": "#35353B", # Dark Lava
+		"word": "Orange",
+		"up": "#ff4700",
+		"down": "#35353B",
 		"sound": preload("res://sounds/green.wav"),
 		"symbol_color": "#9B9BA1",
 		"color_word": "#bec4dd"
 	},
 	{
-		"word": "Teal Green",
-		"up": "#00675C", # Teal Green
-		"down": "#35353B", # Dark Lava
+		"word": "Yellow",
+		"up": "#ffea00",
+		"down": "#35353B",
 		"sound": preload("res://sounds/grass.wav"),
 		"symbol_color": "#9B9BA1",
 		"color_word": "#bec4dd"
 	},
 	{
-		"word": "Brown",
-		"up": "#A74700", # Brown
-		"down": "#35353B", # Dark Lava
+		"word": "Green",
+		"up": "#0db62f",
+		"down": "#35353B",
 		"sound": preload("res://sounds/yellow.wav"),
 		"symbol_color": "#9B9BA1",
 		"color_word": "#bec4dd"
 	},
 	{
-		"word": "Dark Red",
-		"up": "#A70400", # Dark Candy Apple Red
-		"down": "#35353B", # Dark Lava
+		"word": "Cyan",
+		"up": "#00eafa",
+		"down": "#35353B",
 		"sound": preload("res://sounds/orange.wav"),
 		"symbol_color": "#9B9BA1",
 		"color_word": "#bec4dd"
 	},
 	{
-		"word": "Heart Gold",
-		"up": "#829800", # Heart Gold
-		"down": "#35353B", # Dark Lava
+		"word": "Blue",
+		"up": "#000490",
+		"down": "#35353B",
 		"sound": preload("res://sounds/red.wav"),
 		"symbol_color": "#9B9BA1",
 		"color_word": "#bec4dd"
 	},
 	{
 		"word": "Indigo",
-		"up": "#5D0166", # Indigo
-		"down": "#35353B", # Dark Lava
+		"up": "#3c04aa",
+		"down": "#35353B",
 		"sound": preload("res://sounds/pink.wav"),
 		"symbol_color": "#9B9BA1",
 		"color_word": "#bec4dd"
 	},
 	{
-		"word": "Drab",
-		"up": "#9C7500", # Drab
-		"down": "#35353B", # Dark Lava
+		"word": "Violet",
+		"up": "#942de3",
+		"down": "#35353B",
 		"sound": preload("res://sounds/violet.wav"),
 		"symbol_color": "#9B9BA1",
 		"color_word": "#bec4dd"

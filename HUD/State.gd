@@ -30,10 +30,11 @@ func get_mode_info(mode):
 func set_last_level(game_mode, level):
 	state["last_mode"] = game_mode
 
-	if state["%s" % game_mode]["high"] > level:
+	if state["%s" % game_mode]["high"] < level:
 		state["%s" % game_mode]["high"] = level
 
-	state["%s" % game_mode]["last"] = level
+	if state["%s" % game_mode]["last"] < level:
+		state["%s" % game_mode]["last"] = level
 
 func save_data():
 	set_highs()
@@ -42,6 +43,7 @@ func save_data():
 
 	file.open(FILE_NAME, File.WRITE)
 	file.store_string(to_json(state))
+	file.flush()
 	file.close()
 
 func load_data():

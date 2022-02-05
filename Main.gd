@@ -29,6 +29,21 @@ func _ready():
 	$HUD.set_level(level_index)
 
 func play_round():
+
+	if $HUD.is_game_mode($HUD.GAME_MODE_HHCYG):
+
+		if button_count < $HUD.max_button:
+			button_count += int(int(rand_range(button_count-1, button_count + 1))/(button_count*0.9))
+
+			if button_count >= $HUD.max_button:
+				button_count = $HUD.max_button
+
+				lvl_pattern.shuffle()
+
+		$HUD.game_mode_levels["%s" % $HUD.GAME_MODE_HHCYG].append(int(rand_range(button_count-1, button_count + 2)))
+		level = $HUD.game_mode_levels["%s" % $HUD.GAME_MODE_HHCYG]
+
+	$HUD.max_level = level.size()-1
 	$HUD.set_level(level_index)
 	secret_pattern = []
 
@@ -47,7 +62,7 @@ func play_round():
 		if $HUD.is_game_mode($HUD.GAME_MODE_FOLLOW_NAME) or $HUD.is_game_mode($HUD.GAME_MODE_FIND_NAME):
 			cb_symbol = String(i)
 
-		if $HUD.is_game_mode($HUD.GAME_MODE_SHUFFLE):
+		if $HUD.is_game_mode($HUD.GAME_MODE_SHUFFLE) or $HUD.is_game_mode($HUD.GAME_MODE_HHCYG):
 			theme_i = lvl_pattern[i]
 
 		if $HUD.is_game_mode($HUD.GAME_MODE_WORD):
@@ -63,7 +78,7 @@ func play_round():
 
 	$HUD.z_index = cb.z_index + 1
 
-	if not $HUD.is_game_mode($HUD.GAME_MODE_SHUFFLE) and not $HUD.is_game_mode($HUD.GAME_MODE_WORD):
+	if not $HUD.is_game_mode($HUD.GAME_MODE_HHCYG) and not $HUD.is_game_mode($HUD.GAME_MODE_SHUFFLE) and not $HUD.is_game_mode($HUD.GAME_MODE_WORD):
 		secret_pattern.shuffle()
 
 	yield(get_tree().create_timer(2), "timeout")
@@ -74,7 +89,7 @@ func play_round():
 
 	yield($HUD, "show_pattern_complete")
 
-	if $HUD.is_game_mode($HUD.GAME_MODE_WORD) or $HUD.is_game_mode($HUD.GAME_MODE_SHUFFLE) or $HUD.is_game_mode($HUD.GAME_MODE_FIND) or $HUD.is_game_mode($HUD.GAME_MODE_FIND_NAME):
+	if $HUD.is_game_mode($HUD.GAME_MODE_HHCYG) or $HUD.is_game_mode($HUD.GAME_MODE_WORD) or $HUD.is_game_mode($HUD.GAME_MODE_SHUFFLE) or $HUD.is_game_mode($HUD.GAME_MODE_FIND) or $HUD.is_game_mode($HUD.GAME_MODE_FIND_NAME):
 		var new_button_order = []
 
 		for i in range(button_count):
@@ -144,6 +159,8 @@ func _on_RoundTimer_timeout():
 
 func _on_HUD_start_game():
 	level = $HUD.get_mode_levels()
+
+	lvl_pattern.shuffle()
 
 	$RoundTimer.start()
 

@@ -6,8 +6,9 @@ const GAME_MODE_FOLLOW_NAME = "Number Follow"
 const GAME_MODE_FIND_NAME = "Mix-Number"
 const GAME_MODE_FOLLOW = "Color Follow"
 const GAME_MODE_FIND = "Mix-Color"
+const GAME_MODE_HHCYG = "Generative"
 
-const GAME_MODES = [GAME_MODE_WORD, GAME_MODE_SHUFFLE, GAME_MODE_FOLLOW_NAME, GAME_MODE_FIND_NAME, GAME_MODE_FOLLOW, GAME_MODE_FIND]
+const GAME_MODES = [GAME_MODE_WORD, GAME_MODE_SHUFFLE, GAME_MODE_FOLLOW_NAME, GAME_MODE_FIND_NAME, GAME_MODE_FOLLOW, GAME_MODE_FIND, GAME_MODE_HHCYG]
 
 export var game_mode_levels = {}
 
@@ -31,6 +32,7 @@ func _ready():
 	game_mode_levels["%s" % GAME_MODE_FIND_NAME] = [2, 3, 4, 5, 6, 5, 6, 7, 8]
 	game_mode_levels["%s" % GAME_MODE_FOLLOW] = [2, 3, 4, 5, 5, 5, 6, 7, 7, 8, 8]
 	game_mode_levels["%s" % GAME_MODE_FIND] = [3, 3, 4, 5, 5, 6, 6, 7, 7, 8, 8]
+	game_mode_levels["%s" % GAME_MODE_HHCYG] = [3]
 
 	for i in range(GAME_MODES.size()):
 		$TabContainer/GameModeTab/SC/Mode.add_item("%s" % GAME_MODES[i])
@@ -72,9 +74,12 @@ func load_game_modes():
 		var mode_info = $State.get_mode_info(GAME_MODES[i])
 
 		var tag = "%s of %s" % [String(mode_info["last"]), String(mode_info["high"])]
-		
-		if mode_info["high"] > 0 and mode_info["last"] >= mode_info["high"]:
-			tag = "GOLD"
+
+		if GAME_MODE_HHCYG == GAME_MODES[i]:
+			tag = "%s of ..." % String(mode_info["last"])
+		else:
+			if mode_info["high"] > 0 and mode_info["last"] >= mode_info["high"]:
+				tag = "GOLD"
 
 		$TabContainer/GameModeTab/SC/Mode.set_item_text(i, "%s : %s" % [tag, GAME_MODES[i]])
 
