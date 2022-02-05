@@ -9,5 +9,7 @@ edit:
 
 clean:
 	rm -f ./release/android/* ./release/windows/* ./release/linux/* ./release/html/*
+	mkdir -p ./release/android/ ./release/windows/ ./release/linux/ ./release/html/
+	touch ./release/.gdignore
 
 .PHONY: all, edit, clean
